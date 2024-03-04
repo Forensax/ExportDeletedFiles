@@ -1,0 +1,2 @@
+# ExportDeletedFiles
+基于SleuthKit套件的删除文件恢复工具，支持恢复DD、E01、AFF镜像文件中NTFS系统的已删除文件
