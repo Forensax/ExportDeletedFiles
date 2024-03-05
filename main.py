@@ -77,7 +77,10 @@ def main():
                         icat_command = [icat_path, "-o", start, image_path, inode]
                         try:
                             icat_result = subprocess.run(icat_command, capture_output=True)
-                            export_file_path = os.path.join(export_folder, filename)
+                            export_folder_start = os.path.join(export_folder, start)
+                            if not os.path.exists(export_folder_start):
+                                os.makedirs(export_folder_start)
+                            export_file_path = os.path.join(export_folder_start, filename)
                             with open(export_file_path, "wb") as icat_file:
                                 icat_file.write(icat_result.stdout)
                         except subprocess.CalledProcessError as e:
@@ -86,7 +89,8 @@ def main():
             except subprocess.CalledProcessError as e:
                 print(f"fls命令执行失败：{e}")
 
-    print(f"结果已保存到 {log_file}")
+    print(f"日志位置：{log_file}")
+    print(f"导出文件位置：{export_folder}")
 
 if __name__ == "__main__":
     main()
